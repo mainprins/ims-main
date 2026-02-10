@@ -8,6 +8,7 @@ import Reports from "../pages/Reports";
 import NotFound from "../pages/NotFound";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AppLayout from "../layouts/AppLayout";
+import Supplier from "../pages/Supplier";
 
 const AppRoutes = () => (
   <Router>
@@ -25,6 +26,7 @@ const AppRoutes = () => (
       >
         <Route path="/" element={<Dashboard />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/suppliers" element={<Supplier />} />
 
         <Route
           path="/purchases"
