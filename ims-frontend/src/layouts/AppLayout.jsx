@@ -64,6 +64,7 @@ const AppLayout = () => {
           <NavItem to="/products" label="Products" icon={Package} />
           <NavItem to="/purchases" label="Purchases" icon={ShoppingCart} />
           <NavItem to="/sales" label="Sales" icon={TrendingUp} />
+          <NavItem to="/suppliers" label="Suppliers" icon={User} />
 
           {/* Reports Section: Admin / Owner only */}
           {(user?.role === "admin" || user?.role === "ADMIN") && (
