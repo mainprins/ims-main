@@ -4,16 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "main": "main.js",
- "scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "electron": "electron .",
-  "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
-  "dist": "set CSC_IDENTITY_AUTO_DISCOVERY=false && npm run build && electron-builder"
-},
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "electron": "electron .",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "dist": "set CSC_IDENTITY_AUTO_DISCOVERY=false && npm run build && electron-builder"
+  },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
-    "axios": "^1.13.2",
+    "axios": "^1.13.5",
     "lucide-react": "^0.562.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -28,20 +28,20 @@
     "vite": "^7.2.4",
     "wait-on": "^7.2.0"
   },
- "build": {
-  "appId": "com.prince.ims",
-  "productName": "IMS Desktop",
-  "files": [
-    "dist/**/*",
-    "main.js",
-    "package.json"
-  ],
-  "directories": {
-    "output": "release"
-  },
-  "win": {
-    "target": "nsis",
-    "forceCodeSigning": false
+  "build": {
+    "appId": "com.prince.ims",
+    "productName": "IMS Desktop",
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "forceCodeSigning": false
+    }
   }
-}
 }
