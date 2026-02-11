@@ -26,6 +26,8 @@ const AppRoutes = () => (
       >
         <Route path="/" element={<Dashboard />} />
         <Route path="/products" element={<Products />} />
+        
+        {/* New route for suppliers */}
         <Route path="/suppliers" element={<Supplier />} />
 
         <Route
