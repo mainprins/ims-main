@@ -21,3 +21,25 @@ export const createSupplier = async (supplierData) => {
     throw err;
   }
 };
+
+// Update a supplier
+export const updateSupplier = async (id, supplierData) => {
+  try {
+    const response = await API.put(`/suppliers/${id}`, supplierData);
+    return response.data;
+  } catch (err) {
+    console.error("updateSupplier error", err?.response || err.message || err);
+    throw err;
+  }
+};
+
+// Delete a supplier
+export const deleteSupplier = async (id) => {
+  try {
+    const response = await API.delete(`/suppliers/${id}`);
+    return response.data;
+  } catch (err) {
+    console.error("deleteSupplier error", err?.response || err.message || err);
+    throw err;
+  }
+};

@@ -49,7 +49,7 @@ const AppLayout = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-bold leading-tight tracking-tight text-slate-800">
-                IMS <span className="text-indigo-600">Pro</span>
+                Artha <span className="text-indigo-600">Pro</span>
               </span>
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Inventory</span>
             </div>

@@ -126,6 +126,51 @@
   padding: 12px;
 }
 
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eef2ff;
+  justify-content: flex-end;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.btn-icon.edit {
+  color: #2563eb;
+}
+
+.btn-icon.edit:hover {
+  background-color: #eff6ff;
+}
+
+.btn-icon.delete {
+  color: #dc2626;
+}
+
+.btn-icon.delete:hover {
+  background-color: #fef2f2;
+}
+
+.btn.secondary {
+  background: #e2e8f0;
+  color: #1e293b;
+  margin-left: 8px;
+}
+
+.btn.secondary:hover {
+  background: #cbd5e1;
+}
+
 @media (max-width: 800px) {
   .supplier-panel {
     grid-template-columns: 1fr;

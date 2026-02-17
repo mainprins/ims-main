@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { getSuppliers, createSupplier } from "../services/supplierService";
+import {
+  getSuppliers,
+  createSupplier,
+  updateSupplier,
+  deleteSupplier,
+} from "../services/supplierService";
 import "../App.css";
 import "./Supplier.css";
 
 const SupplierPage = () => {
   const [suppliers, setSuppliers] = useState([]);
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", address: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
     fetchSuppliers();
@@ -20,7 +31,11 @@ const SupplierPage = () => {
       const data = await getSuppliers();
       setSuppliers(data || []);
     } catch (err) {
-      setError(err?.response?.data?.message || err.message || "Failed to load suppliers");
+      setError(
+        err?.response?.data?.message ||
+          err.message ||
+          "Failed to load suppliers",
+      );
     } finally {
       setLoading(false);
     }
@@ -35,17 +50,62 @@ const SupplierPage = () => {
     if (!formData.name.trim()) return;
     setError(null);
     try {
-      await createSupplier(formData);
+      if (editingId) {
+        await updateSupplier(editingId, formData);
+        setEditingId(null);
+      } else {
+        await createSupplier(formData);
+      }
       fetchSuppliers();
-      setFormData({ name: "", email: "", phone: "", address: "" });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        address: "",
+      });
     } catch (err) {
-      setError(err?.response?.data?.message || err.message || "Failed to create supplier");
+      setError(
+        err?.response?.data?.message ||
+          err.message ||
+          "Failed to save supplier",
+      );
+    }
+  };
+
+  const handleEdit = (supplier) => {
+    setFormData(supplier);
+    setEditingId(supplier._id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleCancel = () => {
+    setEditingId(null);
+    setFormData({ name: "", email: "", phone: "", address: "" });
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this supplier?")) {
+      setError(null);
+      try {
+        await deleteSupplier(id);
+        fetchSuppliers();
+      } catch (err) {
+        setError(
+          err?.response?.data?.message ||
+            err.message ||
+            "Failed to delete supplier",
+        );
+      }
     }
   };
 
   return (
     <div className="supplier-page">
-      {error && <div className="alert" style={{ marginBottom: 12, color: "#b91c1c" }}>{error}</div>}
+      {error && (
+        <div className="alert" style={{ marginBottom: 12, color: "#b91c1c" }}>
+          {error}
+        </div>
+      )}
       <header className="supplier-header">
         <h1>Suppliers</h1>
         <div className="supplier-meta">Total: {suppliers.length}</div>
@@ -55,28 +115,61 @@ const SupplierPage = () => {
         <form className="supplier-form" onSubmit={handleSubmit}>
           <div className="form-row">
             <label>Name</label>
-            <input name="name" placeholder="Supplier name" value={formData.name} onChange={handleChange} />
+            <input
+              name="name"
+              placeholder="Supplier name"
+              value={formData.name}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-row">
             <label>Email</label>
-            <input name="email" placeholder="contact@example.com" value={formData.email} onChange={handleChange} />
+            <input
+              name="email"
+              placeholder="contact@example.com"
+              value={formData.email}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-row">
             <label>Phone</label>
-            <input name="phone" placeholder="012-345-6789" value={formData.phone} onChange={handleChange} />
+            <input
+              name="phone"
+              placeholder="012-345-6789"
+              value={formData.phone}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-row">
             <label>Address</label>
-            <input name="address" placeholder="Street, City, Country" value={formData.address} onChange={handleChange} />
+            <input
+              name="address"
+              placeholder="Street, City, Country"
+              value={formData.address}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-actions">
-            <button className="btn primary" type="submit" disabled={!formData.name.trim()}>
-              Add Supplier
+            <button
+              className="btn primary"
+              type="submit"
+              disabled={!formData.name.trim()}
+            >
+              {editingId ? "Update Supplier" : "Add Supplier"}
             </button>
+            {editingId && (
+              <button
+                className="btn secondary"
+                type="button"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+            )}
           </div>
         </form>
 
@@ -92,6 +185,22 @@ const SupplierPage = () => {
                 <div className="card-row">{s.email}</div>
                 <div className="card-row">{s.phone}</div>
                 <div className="card-row card-address">{s.address}</div>
+                <div className="card-actions">
+                  <button
+                    className="btn-icon edit"
+                    onClick={() => handleEdit(s)}
+                    title="Edit"
+                  >
+                    ✎
+                  </button>
+                  <button
+                    className="btn-icon delete"
+                    onClick={() => handleDelete(s._id)}
+                    title="Delete"
+                  >
+                    🗑
+                  </button>
+                </div>
               </div>
             ))
           )}
