@@ -25,3 +25,38 @@ export const getSuppliers = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Update a supplier (admin only)
+export const updateSupplier = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, email, phone, address } = req.body;
+
+    const supplier = await Supplier.findByIdAndUpdate(
+      id,
+      { name, email, phone, address },
+      { new: true, runValidators: true }
+    );
+
+    if (!supplier) return res.status(404).json({ message: "Supplier not found" });
+
+    res.json(supplier);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Delete a supplier (admin only)
+export const deleteSupplier = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const supplier = await Supplier.findByIdAndUpdate(id, { isActive: false }, { new: true });
+
+    if (!supplier) return res.status(404).json({ message: "Supplier not found" });
+
+    res.json({ message: "Supplier deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
