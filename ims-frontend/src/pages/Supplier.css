@@ -1,0 +1,133 @@
+/* Styles for Supplier page */
+.supplier-page {
+  max-width: 980px;
+  margin: 24px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(45, 55, 72, 0.08);
+  color: #0f172a;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.supplier-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.supplier-header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: -0.2px;
+}
+
+.supplier-meta {
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.supplier-panel {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+}
+
+.supplier-form {
+  background: #fbfdff;
+  border: 1px solid #e6eef8;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.form-row label {
+  font-size: 0.85rem;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.form-row input {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.form-row input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 4px rgba(96,165,250,0.08);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn.primary {
+  background: linear-gradient(90deg,#2563eb,#3b82f6);
+  color: white;
+}
+
+.btn[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.supplier-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.supplier-card {
+  background: #fff;
+  border: 1px solid #eef2ff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(2,6,23,0.03);
+}
+
+.card-row {
+  font-size: 0.95rem;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.card-title {
+  font-weight: 700;
+  color: #0b1320;
+}
+
+.card-address {
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.loading, .empty {
+  color: #64748b;
+  padding: 12px;
+}
+
+@media (max-width: 800px) {
+  .supplier-panel {
+    grid-template-columns: 1fr;
+  }
+}

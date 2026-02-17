@@ -1,16 +1,23 @@
-import axios from "axios";
-
-// Backend API URL
-const API_URL = "http://localhost:5000/api/suppliers";
+import API from "../api/axios";
 
 // Get all suppliers
 export const getSuppliers = async () => {
-  const response = await axios.get(API_URL);
-  return response.data;
+  try {
+    const response = await API.get("/suppliers");
+    return response.data;
+  } catch (err) {
+    console.error("getSuppliers error", err?.response || err.message || err);
+    throw err;
+  }
 };
 
 // Create a supplier
 export const createSupplier = async (supplierData) => {
-  const response = await axios.post(API_URL, supplierData);
-  return response.data;
+  try {
+    const response = await API.post("/suppliers", supplierData);
+    return response.data;
+  } catch (err) {
+    console.error("createSupplier error", err?.response || err.message || err);
+    throw err;
+  }
 };
