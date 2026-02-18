@@ -9,8 +9,16 @@ import authRouter from "./routes/auth.route.js";
 import productRouter from "./routes/product.route.js";
 import supplierRouter from "./routes/supplier.route.js";
 import reportRouter from "./routes/report.route.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
-dotenv.config();
+
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 // Connect DB FIRST
 connectDB();
