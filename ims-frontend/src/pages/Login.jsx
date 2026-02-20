@@ -74,7 +74,7 @@ const Auth = () => {
               <div className="bg-white/20 p-2 rounded-lg backdrop-blur-md">
                 <Package size={24} />
               </div>
-              <span className="text-xl font-bold tracking-tight">IMS Pro</span>
+              <span className="text-xl font-bold tracking-tight">Artha Pro</span>
             </div>
             
             <h2 className="text-4xl font-black leading-tight mb-6">
